@@ -17,6 +17,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class TodoService {
@@ -47,13 +49,15 @@ public class TodoService {
         );
     }
 
+
+    // 페이징 수정
     @Transactional(readOnly = true)
-    public Page<TodoResponse> getTodos(int page, int size) {
-        Pageable pageable = PageRequest.of(page - 1, size);
+    public List<TodoResponse> getTodos() {
 
-        Page<Todo> todos = todoRepository.findAllByOrderByModifiedAtDesc(pageable);
+        List<Todo> todos = todoRepository.findAllByOrderByModifiedAtDesc();
 
-        return todos.map(todo -> new TodoResponse(
+        return todos.stream()
+                .map(todo -> new TodoResponse(
                 todo.getId(),
                 todo.getTitle(),
                 todo.getContents(),
@@ -61,7 +65,7 @@ public class TodoService {
                 new UserResponse(todo.getUser().getId(), todo.getUser().getEmail()),
                 todo.getCreatedAt(),
                 todo.getModifiedAt()
-        ));
+        )).toList();
     }
 
     @Transactional(readOnly = true)

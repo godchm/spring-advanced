@@ -34,6 +34,7 @@ public class JwtUtil {
         key = Keys.hmacShaKeyFor(bytes);
     }
 
+    // 토큰 생성
     public String createToken(Long userId, String email, UserRole userRole) {
         Date date = new Date();
 
