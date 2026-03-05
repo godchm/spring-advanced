@@ -32,7 +32,7 @@ public class CommentAdminCheckInterceptor implements HandlerInterceptor {
 
         // 2. 로그인한 사용자가 권한이 있는지 검사 필요.
         UserRole userRole = UserRole.of(role);
-        log.info("ADMIN ACCESS OK time={}, uri={}, userId={}",
+        log.info("ADMIN 권한 성공 time={}, uri={}, userId={}",
                 java.time.LocalDateTime.now(),
                 request.getRequestURI(),
                 userId);
