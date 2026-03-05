@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/test
-    username: root
-    password: 12345678
+    username: ${chm}
+    password: ${chm_password}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     show-sql: true
@@ -16,4 +16,4 @@ spring:
     ## 암호화에 사용할 비밀키
 jwt:
     secret:
-        key: IfthisgetsstolenitsabigproblemIfthelengthistooshortthesecurityisnotsufficientsoanerroroccurs
+        key: ${chm_key}
